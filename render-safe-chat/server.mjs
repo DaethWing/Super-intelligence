@@ -22,26 +22,11 @@ app.use(async (req, res, next) => {
   }
 });
 
-const BLOCKED = [
-  /child\s+sexual/i,
-  /how\s+to\s+make\s+(?:a\s+)?bomb/i,
-  /make\s+explosives?/i,
-  /hire\s+hitman/i,
-  /write\s+malware/i,
-  /exploit\s+this\s+vulnerability/i,
-  /bypass\s+(?:auth|2fa|drm|paywall)/i,
-  /credit\s*card\s*number\s*generator/i,
-  /make\s+fentanyl|illicit\s+drug\s+manufacture/i,
-  /doxx?ing/i
-];
-const looksUnsafe = s => BLOCKED.some(rx => rx.test(s || ''));
-
+  
 const SYSTEM_PROMPT = `
 You are a helpful, honest assistant for a personal website.
 - Be accurate and clear; ask for missing context if needed.
 - Be creative when asked to brainstorm or write.
-- Refuse requests that could meaningfully enable illegal, dangerous, or privacy-invasive actions.
-- If refusing, explain briefly and suggest a safer alternative.
 `;
 
 app.get('/health', (_, res) => res.json({ ok: true }));
